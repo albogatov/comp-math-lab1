@@ -9,24 +9,30 @@ public class SystemSolver {
 
     public double[] solveSystem(Matrix matrix) {
         Matrix triangularMatrix = findTriangularMatrix(matrix);
-        double[] solution = new double[triangularMatrix.getRows()];
-        List<Integer> foundVariables = new ArrayList<Integer>();
+        double det = triangularMatrix.findDiagonalMatrixDet();
+        if (det == 0)
+            return null;
+        double[] solution = new double[triangularMatrix.getRows() + 1];
+        //List<Integer> foundVariables = new ArrayList<Integer>();
         for (int i = triangularMatrix.getRows() - 1; i >= 0; i--) {
-            int solutionNumber = -1;
+            int solutionNumber = i;
             double sub = 0;
+            /*
             for (int j = 0; j < triangularMatrix.getColumns() - 1; j++) {
                 if (triangularMatrix.getElement(i, j) != 0 && !foundVariables.contains(j)) {
                     solutionNumber = j;
-                    foundVariables.add(j);
+                    //foundVariables.add(j);
                     break;
                 }
             }
+             */
             for (int j = 0; j < triangularMatrix.getColumns() - 1; j++) {
                 if (j != solutionNumber)
                     sub += triangularMatrix.getElement(i, j) * solution[j];
             }
             solution[solutionNumber] = (triangularMatrix.getElement(i, triangularMatrix.getColumns()-1) - sub)/triangularMatrix.getElement(i, solutionNumber);
         }
+        solution[triangularMatrix.getRows()] = det;
         return solution;
     }
 
@@ -34,28 +40,24 @@ public class SystemSolver {
         int currentRowsRemoved = 0;
         int initialRows = matrix.getRows();
         int initialColumns = matrix.getColumns();
-        double[] maxElementData = matrix.findAbsMaxElement();
         double[][] mainElementRows = new double[matrix.getRows()][matrix.getColumns()];
-        double[] sums = matrix.findMatrixSums();
-        double[] multipliers = matrix.findMultipliers(maxElementData[0], (int) maxElementData[1], (int) maxElementData[2]);
         for (int i = 0; i < initialRows; i++) {
+            double[] maxElementData = matrix.findColumnAbsMaxElement(i);
+            //double[] maxElementData = matrix.findAbsMaxElement();
+            double[] sums = matrix.findMatrixSums();
+            double[] multipliers = matrix.findMultipliers(maxElementData[0], (int) maxElementData[1], (int) maxElementData[2]);
             double[] mainElementRow = matrix.getMatrixRow((int) maxElementData[1]);
             mainElementRows = fillRowIntoArray(mainElementRow, mainElementRows, currentRowsRemoved);
             matrix.modifyMatrix(multipliers, sums, mainElementRow, (int) maxElementData[1]);
             matrix.removeMatrixRow((int) maxElementData[1]);
-            System.out.println("Elements of the matrix are (iter)");
-            for (int a = 0; a < matrix.getRows(); a++) {
-                for (int j = 0; j < matrix.getColumns(); j++)
-                    System.out.print(matrix.getElement(a, j) + "  ");
-                System.out.println();
-            }
-            maxElementData = matrix.findAbsMaxElement();
-            multipliers = matrix.findMultipliers(maxElementData[0], (int) maxElementData[1], (int) maxElementData[2]);
-            sums = matrix.findMatrixSums();
+            //maxElementData = matrix.findAbsMaxElement();
+            //multipliers = matrix.findMultipliers(maxElementData[0], (int) maxElementData[1], (int) maxElementData[2]);
+            //sums = matrix.findMatrixSums();
             currentRowsRemoved++;
         }
         Matrix triangularMatrix = new Matrix(initialRows, initialColumns);
         triangularMatrix.setElements(mainElementRows);
+        //sortTriangularMatrix(triangularMatrix);
         System.out.println("Elements of the trio matrix are");
         for (int a = 0; a < triangularMatrix.getRows(); a++) {
             for (int j = 0; j < triangularMatrix.getColumns(); j++)
@@ -72,6 +74,34 @@ public class SystemSolver {
         return array;
     }
 
+    public double[] findDifferences(Matrix matrix, double[] solution) {
+        double[] differences = new double[matrix.getRows()];
+        for (int i = 0; i < matrix.getRows(); i++) {
+            double leftPart = 0;
+            for (int j = 0; j < matrix.getColumns() - 1; j++) {
+                leftPart += matrix.getElement(i, j)*solution[j];
+            }
+            differences[i] = Math.abs(leftPart - matrix.getElement(i, matrix.getColumns() - 1));
+        }
+        return differences;
+    }
+
+    /*
+    public Matrix sortTriangularMatrix(Matrix matrix) {
+        for (int j = 0; j < matrix.getColumns() - 1; j++) {
+            int zeroCount = 0;
+            for (int i = 0; i < matrix.getRows(); i++) {
+                if (matrix.getElement(i,j) == 0)
+                    zeroCount++;
+            }
+            if (matrix.getRows() - 1 - j < zeroCount) {
+                matrix.swapColumns(j, j-1);
+            }
+        }
+        return matrix;
+    }
+     */
+
 }
 
 /*
@@ -87,4 +117,26 @@ public class SystemSolver {
 2
 -1
 9
+ */
+/*
+3
+4
+-9
+5
+-14
+-15
+-12
+50
+-16
+44
+-27
+-36
+73
+8
+142
+9
+12
+-10
+-16
+-76
  */

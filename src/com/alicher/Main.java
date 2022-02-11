@@ -36,11 +36,17 @@ public class Main {
                 System.out.println();
             }
             Matrix matrix = new Matrix(m, n);
+            Matrix initialMatrix = new Matrix(m,n);
             matrix.setElements(first);
+            initialMatrix.setElements(first);
             SystemSolver systemSolver = new SystemSolver();
             double[] solution = systemSolver.solveSystem(matrix);
-            for(int u = 0; u < solution.length; u++)
+            double[] differences = systemSolver.findDifferences(initialMatrix, solution);
+            for(int u = 0; u < solution.length - 1; u++)
                 System.out.println(solution[u]);
+            System.out.println(solution[solution.length - 1]);
+            for(int u = 0; u < differences.length; u++)
+                System.out.println(differences[u]);
             System.out.println("Done");
         }
         catch (Exception e) {

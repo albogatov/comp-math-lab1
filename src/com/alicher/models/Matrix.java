@@ -19,6 +19,26 @@ public class Matrix {
 
     }
 
+    public double[] findColumnAbsMaxElement(int column) {
+        double maxElementData[] = new double[3];
+        for (int i = 0; i < rows; i++) {
+            /*
+            for (int j = 0; j < columns - 1; j++)
+                if (Math.abs(elements[i][j]) > Math.abs(maxElementData[0])) {
+                    maxElementData[0] = elements[i][j];
+                    maxElementData[1] = i;
+                    maxElementData[2] = j;
+                }
+             */
+            if (Math.abs(elements[i][column]) > Math.abs(maxElementData[0])) {
+                maxElementData[0] = elements[i][column];
+                maxElementData[1] = i;
+                maxElementData[2] = column;
+            }
+        }
+        return maxElementData;
+    }
+
     public double[] findAbsMaxElement() {
         double maxElementData[] = new double[3];
         for (int i = 0; i < rows; i++) {
@@ -68,23 +88,20 @@ public class Matrix {
 
     public void modifyMatrix(double[] multipliers, double[] sums, double[] mainElementRow, int mainElementRowIdx) {
         double[] newSums = new double[rows];
-        //double[] mainElementCoefficients = elements[mainElementRow];
         int count = 0;
         for (int i = 0; i < rows; i++) {
             //while (true) {
-                //count++;
-                //if (count > 10)
-                //   break;
-                System.out.println(Math.abs(newSums[i] - sums[i]));
-                for (int j = 0; j < columns; j++) {
-                    elements[i][j] = elements[i][j] + mainElementRow[j] * multipliers[i];
-                    newSums[i] = findRowSum(i);
-                }
-                //if (mainElementRowIdx == i || Math.abs(newSums[i] - sums[i]) < 0.00001)
-                //    break;
+            //count++;
+            //if (count > 10)
+            //   break;
+            for (int j = 0; j < columns; j++) {
+                elements[i][j] = elements[i][j] + mainElementRow[j] * multipliers[i];
+                newSums[i] = findRowSum(i);
+            }
+            //if (mainElementRowIdx == i || Math.abs(newSums[i] - sums[i]) < 0.00001)
+            //    break;
             //}
         }
-        System.out.println(elements);
     }
 
     public void removeMatrixRow(int row) {
@@ -94,7 +111,6 @@ public class Matrix {
             }
         }
         rows = rows - 1;
-        System.out.println(elements);
     }
 
     public void setElements(double[][] elements) {
@@ -115,6 +131,23 @@ public class Matrix {
 
     public double getElement(int i, int j) {
         return this.elements[i][j];
+    }
+
+    public void swapColumns(int column1, int column2) {
+        for (int i = 0; i < rows; i++) {
+            double buffer = elements[i][column1];
+            elements[i][column1] = elements[i][column2];
+            elements[i][column2] = buffer;
+        }
+        System.out.println(elements);
+    }
+
+    public double findDiagonalMatrixDet() {
+        int det = 0;
+        for (int i = 0; i < rows; i++) {
+            det += elements[i][i];
+        }
+        return det;
     }
 }
 
