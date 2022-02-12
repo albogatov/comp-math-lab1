@@ -1,18 +1,20 @@
 package com.alicher.util;
 
 import com.alicher.models.Matrix;
+import com.alicher.models.Solution;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class SystemSolver {
 
-    public double[] solveSystem(Matrix matrix) {
+    public Solution solveSystem(Matrix matrix) {
+        Matrix initialMatrix = new Matrix(matrix.getRows(), matrix.getElements());
         Matrix triangularMatrix = findTriangularMatrix(matrix);
         double det = triangularMatrix.findDiagonalMatrixDet();
         if (det == 0)
             return null;
-        double[] solution = new double[triangularMatrix.getRows() + 1];
+        double[] variables = new double[triangularMatrix.getRows()];
         //List<Integer> foundVariables = new ArrayList<Integer>();
         for (int i = triangularMatrix.getRows() - 1; i >= 0; i--) {
             int solutionNumber = i;
@@ -28,11 +30,13 @@ public class SystemSolver {
              */
             for (int j = 0; j < triangularMatrix.getColumns() - 1; j++) {
                 if (j != solutionNumber)
-                    sub += triangularMatrix.getElement(i, j) * solution[j];
+                    sub += triangularMatrix.getElement(i, j) * variables[j];
             }
-            solution[solutionNumber] = (triangularMatrix.getElement(i, triangularMatrix.getColumns()-1) - sub)/triangularMatrix.getElement(i, solutionNumber);
+            variables[solutionNumber] = (triangularMatrix.getElement(i, triangularMatrix.getColumns()-1) - sub)/triangularMatrix.getElement(i, solutionNumber);
         }
-        solution[triangularMatrix.getRows()] = det;
+        //variables[triangularMatrix.getRows()] = det;
+        double[] differences = findDifferences(initialMatrix, variables);
+        Solution solution = new Solution(triangularMatrix, variables, det, differences);
         return solution;
     }
 
@@ -58,12 +62,6 @@ public class SystemSolver {
         Matrix triangularMatrix = new Matrix(initialRows, initialColumns);
         triangularMatrix.setElements(mainElementRows);
         //sortTriangularMatrix(triangularMatrix);
-        System.out.println("Elements of the trio matrix are");
-        for (int a = 0; a < triangularMatrix.getRows(); a++) {
-            for (int j = 0; j < triangularMatrix.getColumns(); j++)
-                System.out.print(triangularMatrix.getElement(a, j) + "  ");
-            System.out.println();
-        }
         return triangularMatrix;
     }
 

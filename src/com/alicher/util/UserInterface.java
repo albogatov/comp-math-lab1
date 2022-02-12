@@ -3,10 +3,6 @@ package com.alicher.util;
 import java.io.IOException;
 import java.io.Reader;
 import java.io.Writer;
-import java.security.InvalidParameterException;
-import java.time.LocalDate;
-import java.time.ZonedDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 /**
@@ -21,21 +17,15 @@ public class UserInterface {
      * Куда идет запись.
      */
     private final Writer writer;
-    /**
-     * Режим взаимодействия.
-     */
-    private final boolean interactionMode;
 
     /**
      * Стандартный конструктор.
      *
      * @param r  откуда считывать.
      * @param w  куда записывать.
-     * @param im режим взаимодействия (true - интерактивный).
      */
-    public UserInterface(Reader r, Writer w, boolean im) {
+    public UserInterface(Reader r, Writer w) {
         this.writer = w;
-        this.interactionMode = im;
         this.scanner = new Scanner(r);
     }
 
@@ -46,6 +36,14 @@ public class UserInterface {
      */
     public String read() {
         return scanner.nextLine();
+    }
+
+    public double readDouble() {
+        return scanner.nextDouble();
+    }
+
+    public int readInt() {
+        return scanner.nextInt();
     }
 
     /**

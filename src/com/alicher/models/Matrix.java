@@ -19,6 +19,17 @@ public class Matrix {
 
     }
 
+    public Matrix(int size, double[][] elements) {
+
+        if (size <= 0)
+            throw new IllegalArgumentException("Неправильные измерения матрицы");
+
+        this.rows = size;
+        this.columns = size+1;
+        this.elements = elements;
+
+    }
+
     public double[] findColumnAbsMaxElement(int column) {
         double maxElementData[] = new double[3];
         for (int i = 0; i < rows; i++) {
