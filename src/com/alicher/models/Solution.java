@@ -1,10 +1,10 @@
 package com.alicher.models;
 
 public class Solution {
-    private Matrix triangularMatrix;
-    private double[] variables;
-    private double determinant;
-    private double[] differences;
+    private final Matrix triangularMatrix;
+    private final double[] variables;
+    private final double determinant;
+    private final double[] differences;
 
     public Solution(Matrix triangularMatrix, double[] variables, double determinant, double[] differences) {
             this.triangularMatrix = triangularMatrix;

@@ -4,8 +4,6 @@ import com.alicher.cmd.*;
 
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * Класс отвечающий за распознование и вызов команд.
@@ -58,15 +56,6 @@ public class CommandCenter {
         if (commandCenter == null)
             return new CommandCenter();
         return commandCenter;
-    }
-
-    /**
-     * Метод, возврашающий полный список всех команд.
-     *
-     * @return Список команд.
-     */
-    public List<Command> retrieveAllCommands() {
-        return commands.keySet().stream().map(commands::get).collect(Collectors.toList());
     }
 
     /**

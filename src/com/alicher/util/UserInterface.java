@@ -43,7 +43,7 @@ public class UserInterface {
     }
 
     public double readDouble() throws IOException {
-        double input = 0;
+        double input;
         while (true) {
             try {
                 input = scanner.nextDouble();
@@ -57,7 +57,7 @@ public class UserInterface {
     }
 
     public int readInt() throws IOException {
-        int input = 0;
+        int input;
         while (true) {
             try {
                 input = scanner.nextInt();

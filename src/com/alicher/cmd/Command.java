@@ -1,6 +1,5 @@
 package com.alicher.cmd;
 
-import com.alicher.models.Matrix;
 import com.alicher.util.SystemSolver;
 import com.alicher.util.UserInterface;
 
@@ -10,11 +9,9 @@ public abstract class Command {
 
     public String description;
 
-    //public abstract String execute();
     /**
      * Метод исполнения команды.
      *  @param ui                 объект, через который ведется взаимодействие с пользователем.
-     * @param systemSolver
      */
     public abstract void execute(UserInterface ui, SystemSolver systemSolver) throws Exception;
 
@@ -35,6 +32,5 @@ public abstract class Command {
     public String getHelp() {
         return description;
     }
-
 
 }

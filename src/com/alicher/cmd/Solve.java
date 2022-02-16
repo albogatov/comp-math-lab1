@@ -17,8 +17,6 @@ public class Solve extends Command {
             for (int i = 0; i < solution.getTriangularMatrix().getRows(); i++) {
                 for (int j = 0; j < solution.getTriangularMatrix().getColumns(); j++) {
                     ui.displayMessageNoNL(String.format(" %7.3f ", solution.getTriangularMatrix().getElement(i,j)));
-                    //System.out.printf(" %5.2f", solution.getTriangularMatrix().getElement(i, j), " ");
-                    //System.out.print(" ");
                 }
                 ui.displayMessage("");
 
@@ -27,14 +25,12 @@ public class Solve extends Command {
                 int solutionNumber = i + 1;
                 ui.displayMessage(String.format("x" + solutionNumber + " is %5.3f ", solution.getVariables()[i]));
                 ui.displayMessage("Difference for equation №" + solutionNumber + " is: " + solution.getDifferences()[i]);
-                //ui.displayMessage("x" + solutionNumber + " is " + solution.getVariables()[i]);
-                //ui.displayMessage("Difference for equation №" + solutionNumber + " is: " + solution.getDifferences()[i]);
             }
         }
     }
 
     @Override
-    public void execute(UserInterface ui, SystemSolver systemSolver) throws Exception {
+    public void execute(UserInterface ui, SystemSolver systemSolver) {
 
     }
 }

@@ -1,6 +1,5 @@
 package com.alicher.cmd;
 
-import com.alicher.models.Matrix;
 import com.alicher.util.SystemSolver;
 import com.alicher.util.UserInterface;
 
