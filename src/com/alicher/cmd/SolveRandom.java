@@ -15,7 +15,7 @@ public class SolveRandom extends Command {
 
     public void execute(UserInterface ui, SystemSolver systemSolver) throws Exception {
         Random random = new Random();
-        int size = random.nextInt(20 - 2) + 2;
+        int size = random.nextInt(21 - 1) + 1;
         ui.displayMessage("Randomly generated matrix size: " + size);
         double[][] elements = new double[size][size + 1];
         for (int i = 0; i < size; i++) {

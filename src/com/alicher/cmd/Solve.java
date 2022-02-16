@@ -16,16 +16,19 @@ public class Solve extends Command {
             ui.displayMessage("Elements of the triangular matrix are:");
             for (int i = 0; i < solution.getTriangularMatrix().getRows(); i++) {
                 for (int j = 0; j < solution.getTriangularMatrix().getColumns(); j++) {
-                    System.out.printf("%f", solution.getTriangularMatrix().getElement(i, j));
-                    System.out.print(" ");
+                    ui.displayMessageNoNL(String.format(" %7.3f ", solution.getTriangularMatrix().getElement(i,j)));
+                    //System.out.printf(" %5.2f", solution.getTriangularMatrix().getElement(i, j), " ");
+                    //System.out.print(" ");
                 }
-                System.out.println();
+                ui.displayMessage("");
 
             }
             for (int i = 0; i < solution.getVariables().length; i++) {
                 int solutionNumber = i + 1;
-                ui.displayMessage("x" + solutionNumber + " is " + solution.getVariables()[i]);
+                ui.displayMessage(String.format("x" + solutionNumber + " is %5.3f ", solution.getVariables()[i]));
                 ui.displayMessage("Difference for equation №" + solutionNumber + " is: " + solution.getDifferences()[i]);
+                //ui.displayMessage("x" + solutionNumber + " is " + solution.getVariables()[i]);
+                //ui.displayMessage("Difference for equation №" + solutionNumber + " is: " + solution.getDifferences()[i]);
             }
         }
     }

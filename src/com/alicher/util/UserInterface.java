@@ -100,6 +100,11 @@ public class UserInterface {
         write(message + "\n");
     }
 
+    public void displayMessageNoNL(String message) throws IOException {
+        write(message);
+    }
+
+
     public boolean isInteractive() {
         return interactive;
     }

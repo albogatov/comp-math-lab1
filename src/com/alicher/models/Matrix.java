@@ -10,7 +10,7 @@ public class Matrix {
 
     public Matrix(int rows, int columns) {
 
-        if (rows <= 1 || columns <= 1)
+        if (rows <= 0 || columns <= 0)
             throw new IllegalArgumentException("Incorrect matrix dimensions");
 
         this.rows = rows;
@@ -21,7 +21,7 @@ public class Matrix {
 
     public Matrix(int size, double[][] elements) {
 
-        if (size <= 1)
+        if (size <= 0)
             throw new IllegalArgumentException("Incorrect matrix dimensions");
 
         this.rows = size;
