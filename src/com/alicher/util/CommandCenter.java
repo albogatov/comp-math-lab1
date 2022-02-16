@@ -27,6 +27,7 @@ public class CommandCenter {
         addCmd(new SolveFromFile());
         addCmd(new SolveFromInput());
         addCmd(new SolveRandom());
+        addCmd(new Exit());
     }
 
     /**
