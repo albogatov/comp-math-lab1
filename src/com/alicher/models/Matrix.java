@@ -10,8 +10,8 @@ public class Matrix {
 
     public Matrix(int rows, int columns) {
 
-        if (rows <= 0 || columns <= 0)
-            throw new IllegalArgumentException("Неправильные измерения матрицы");
+        if (rows <= 1 || columns <= 1)
+            throw new IllegalArgumentException("Incorrect matrix dimensions");
 
         this.rows = rows;
         this.columns = columns;
@@ -21,8 +21,8 @@ public class Matrix {
 
     public Matrix(int size, double[][] elements) {
 
-        if (size <= 0)
-            throw new IllegalArgumentException("Неправильные измерения матрицы");
+        if (size <= 1)
+            throw new IllegalArgumentException("Incorrect matrix dimensions");
 
         this.rows = size;
         this.columns = size+1;

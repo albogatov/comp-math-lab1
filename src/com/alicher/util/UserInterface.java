@@ -3,6 +3,7 @@ package com.alicher.util;
 import java.io.IOException;
 import java.io.Reader;
 import java.io.Writer;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 /**
@@ -41,12 +42,32 @@ public class UserInterface {
         return scanner.nextLine();
     }
 
-    public double readDouble() {
-        return scanner.nextDouble();
+    public double readDouble() throws IOException {
+        double input = 0;
+        while (true) {
+            try {
+                input = scanner.nextDouble();
+                break;
+            } catch (InputMismatchException e) {
+                displayMessage("Incorrect input, try again");
+                scanner.next();
+            }
+        }
+        return input;
     }
 
-    public int readInt() {
-        return scanner.nextInt();
+    public int readInt() throws IOException {
+        int input = 0;
+        while (true) {
+            try {
+                input = scanner.nextInt();
+                break;
+            } catch (InputMismatchException e) {
+                displayMessage("Incorrect input, try again");
+                scanner.next();
+            }
+        }
+        return input;
     }
 
     /**
