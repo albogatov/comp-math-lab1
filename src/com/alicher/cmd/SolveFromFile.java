@@ -6,9 +6,10 @@ import com.alicher.util.UserInterface;
 
 public class SolveFromFile extends Command {
 
-    public String line = "solve_from_file";
-
-    public String description = "Решить СЛАУ, взяв данные из файла";
+    public SolveFromFile() {
+        line = "solve_from_file";
+        description = "Решить СЛАУ, взяв данные из файла";
+    }
 
     public void execute(UserInterface ui, String[] arguments, SystemSolver systemSolver) throws Exception {
         /*

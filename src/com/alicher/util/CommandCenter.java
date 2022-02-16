@@ -24,9 +24,9 @@ public class CommandCenter {
      * Конструктор центра комманд, где добавляются все возможные команды.
      */
     public CommandCenter() {
-        //addCmd(new SolveFromFile());
+        addCmd(new SolveFromFile());
         addCmd(new SolveFromInput());
-        //addCmd(new SolveRandom());
+        addCmd(new SolveRandom());
     }
 
     /**
