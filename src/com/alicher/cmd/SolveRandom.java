@@ -13,7 +13,7 @@ public class SolveRandom extends Command {
         description = "Решить случайным образом сгенерированную СЛАУ";
     }
 
-    public void execute(UserInterface ui, String[] arguments, SystemSolver systemSolver) throws Exception {
+    public void execute(UserInterface ui, SystemSolver systemSolver) throws Exception {
         Random random = new Random();
         int size = random.nextInt(20 - 2) + 2;
         ui.displayMessage("Randomly generated matrix size: " + size);
@@ -26,6 +26,6 @@ public class SolveRandom extends Command {
         }
         Matrix matrix = new Matrix(size, elements);
         Solve solveOp = new Solve();
-        solveOp.execute(ui, arguments, systemSolver, matrix);
+        solveOp.execute(ui, systemSolver, matrix);
     }
 }

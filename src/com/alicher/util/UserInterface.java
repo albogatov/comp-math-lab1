@@ -18,15 +18,18 @@ public class UserInterface {
      */
     private final Writer writer;
 
+    private final boolean interactive;
+
     /**
      * Стандартный конструктор.
      *
      * @param r  откуда считывать.
      * @param w  куда записывать.
      */
-    public UserInterface(Reader r, Writer w) {
+    public UserInterface(Reader r, Writer w, boolean interactive) {
         this.writer = w;
         this.scanner = new Scanner(r);
+        this.interactive = interactive;
     }
 
     /**
@@ -74,5 +77,9 @@ public class UserInterface {
      */
     public void displayMessage(String message) throws IOException {
         write(message + "\n");
+    }
+
+    public boolean isInteractive() {
+        return interactive;
     }
 }

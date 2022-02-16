@@ -14,10 +14,9 @@ public abstract class Command {
     /**
      * Метод исполнения команды.
      *  @param ui                 объект, через который ведется взаимодействие с пользователем.
-     * @param arguments          необходимые для исполнения аргументы.
      * @param systemSolver
      */
-    public abstract void execute(UserInterface ui, String[] arguments, SystemSolver systemSolver) throws Exception;
+    public abstract void execute(UserInterface ui, SystemSolver systemSolver) throws Exception;
 
     /**
      * Возвращает строку, вызывающую команду.

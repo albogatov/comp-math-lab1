@@ -4,6 +4,9 @@ import com.alicher.models.Matrix;
 import com.alicher.util.SystemSolver;
 import com.alicher.util.UserInterface;
 
+import java.io.FileReader;
+import java.io.OutputStreamWriter;
+
 public class SolveFromFile extends Command {
 
     public SolveFromFile() {
@@ -11,12 +14,12 @@ public class SolveFromFile extends Command {
         description = "Решить СЛАУ, взяв данные из файла";
     }
 
-    public void execute(UserInterface ui, String[] arguments, SystemSolver systemSolver) throws Exception {
-        /*
-        Matrix matrix;
-        Matrix initialMatrix;
-        double[] solution = systemSolver.solveSystem(matrix);
-        double[] differences = systemSolver.findDifferences(initialMatrix, solution);
-         */
+    public void execute(UserInterface ui, SystemSolver systemSolver) throws Exception {
+        String filePath;
+        ui.displayMessage("Enter file path");
+        filePath = ui.read();
+        UserInterface fileInteraction = new UserInterface(new FileReader(filePath), new OutputStreamWriter(System.out), false);
+        SolveFromInput solveFromInputOp = new SolveFromInput();
+        solveFromInputOp.execute(fileInteraction, systemSolver);
     }
 }

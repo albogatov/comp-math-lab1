@@ -73,13 +73,11 @@ public class CommandCenter {
      *
      * @param ui                 объект, через который ведется взаимодействие с пользователем.
      * @param line               часть строки пользовательского ввода, содержающая команду.
-     * @param fullLine           полная строка ввода с аргументами.
      * @throws IOException в случае ошибки ввода/вывода.
      */
-    public void executeCommand(UserInterface ui, String line, String fullLine, SystemSolver systemSolver) throws Exception {
+    public void executeCommand(UserInterface ui, String line, SystemSolver systemSolver) throws Exception {
         Command cmd = getCmd(line);
-        String[] args = fullLine.split(" ");
-        cmd.execute(ui, args, systemSolver);
+        cmd.execute(ui, systemSolver);
     }
 
 }

@@ -11,16 +11,18 @@ public class SolveFromInput extends Command {
         description = "Решить СЛАУ с пользовательскими данными";
     }
 
-    public void execute(UserInterface ui, String[] arguments, SystemSolver systemSolver) throws Exception {
-        ui.displayMessage("Enter matrix size");
+    public void execute(UserInterface ui, SystemSolver systemSolver) throws Exception {
+        if(ui.isInteractive())
+            ui.displayMessage("Enter matrix size");
         int size = ui.readInt();
         double[][] elements = new double[size][size + 1];
-        ui.displayMessage("Enter the elements of the matrix");
+        if(ui.isInteractive())
+            ui.displayMessage("Enter the elements of the matrix");
         for (int i = 0; i < size; i++)
             for (int j = 0; j < size + 1; j++)
                 elements[i][j] = ui.readDouble();
         Matrix matrix = new Matrix(size, elements);
         Solve solveOp = new Solve();
-        solveOp.execute(ui, arguments, systemSolver, matrix);
+        solveOp.execute(ui, systemSolver, matrix);
     }
 }

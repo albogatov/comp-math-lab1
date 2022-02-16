@@ -7,7 +7,7 @@ import com.alicher.util.UserInterface;
 
 public class Solve extends Command {
 
-    public void execute(UserInterface ui, String[] arguments, SystemSolver systemSolver, Matrix matrix) throws Exception {
+    public void execute(UserInterface ui, SystemSolver systemSolver, Matrix matrix) throws Exception {
         Solution solution = systemSolver.solveSystem(matrix);
         if (solution == null)
             ui.displayMessage("Determinant is zero, the system is unsolvable");
@@ -31,7 +31,7 @@ public class Solve extends Command {
     }
 
     @Override
-    public void execute(UserInterface ui, String[] arguments, SystemSolver systemSolver) throws Exception {
+    public void execute(UserInterface ui, SystemSolver systemSolver) throws Exception {
 
     }
 }

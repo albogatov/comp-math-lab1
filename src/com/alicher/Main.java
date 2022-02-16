@@ -65,7 +65,7 @@ public class Main {
         }
          */
         try {
-            UserInterface userInteraction = new UserInterface(new InputStreamReader(System.in), new OutputStreamWriter(System.out));
+            UserInterface userInteraction = new UserInterface(new InputStreamReader(System.in), new OutputStreamWriter(System.out), true);
             SystemSolver systemSolver = new SystemSolver();
             String line;
             userInteraction.displayMessage("Hello! Please enter one of the following commands:\n " +
@@ -75,10 +75,8 @@ public class Main {
             do {
                 line = userInteraction.read().trim();
                 String cmd = line.split(" ")[0];
-                CommandCenter.getInstance().executeCommand(userInteraction, cmd, line, systemSolver);
+                CommandCenter.getInstance().executeCommand(userInteraction, cmd, systemSolver);
             } while (userInteraction.hasNextLine());
-            Command cmd = new SolveFromInput();
-            cmd.execute(userInteraction, arg, systemSolver);
         } catch (Exception e) {
             e.printStackTrace();
         }
