@@ -24,8 +24,12 @@ public class SolveRandom extends Command {
                 elements[i][j] = random.nextDouble()*scale;
             }
         }
-        Matrix matrix = new Matrix(size, elements);
-        Solve solveOp = new Solve();
-        solveOp.execute(ui, systemSolver, matrix);
+        try {
+            Matrix matrix = new Matrix(size, elements);
+            Solve solveOp = new Solve();
+            solveOp.execute(ui, systemSolver, matrix);
+        } catch (IllegalArgumentException e) {
+            ui.displayMessage(e.getMessage());
+        }
     }
 }

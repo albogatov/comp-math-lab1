@@ -21,8 +21,12 @@ public class SolveFromInput extends Command {
         for (int i = 0; i < size; i++)
             for (int j = 0; j < size + 1; j++)
                 elements[i][j] = ui.readDouble();
-        Matrix matrix = new Matrix(size, elements);
-        Solve solveOp = new Solve();
-        solveOp.execute(ui, systemSolver, matrix);
+        try {
+            Matrix matrix = new Matrix(size, elements);
+            Solve solveOp = new Solve();
+            solveOp.execute(ui, systemSolver, matrix);
+        } catch (IllegalArgumentException e) {
+            ui.displayMessage(e.getMessage());
+        }
     }
 }

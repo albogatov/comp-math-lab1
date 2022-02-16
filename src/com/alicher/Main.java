@@ -7,6 +7,7 @@ import com.alicher.util.CommandCenter;
 import com.alicher.util.SystemSolver;
 import com.alicher.util.UserInterface;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
@@ -17,8 +18,8 @@ public class Main {
     public static void main(String[] arg) {
         try {
             UserInterface userInteraction = new UserInterface(new InputStreamReader(System.in), new OutputStreamWriter(System.out), true);
-            userInteraction.displayMessage("Hello! Please enter one of the following commands:\n " +
-                    "solve_from_input - solve a system based on a matrix of your choice\n " +
+            userInteraction.displayMessage("Hello! Please enter one of the following commands:\n" +
+                    "solve_from_input - solve a system based on a matrix of your choice\n" +
                     "solve_from_file - solve a system based on a matrix from a chosen file\n" +
                     "solve_random - solve a system based on a randomly generated matrix");
             while (true) {
@@ -32,8 +33,6 @@ public class Main {
                     } while (userInteraction.hasNextLine());
                 } catch (NullPointerException e) {
                     userInteraction.displayMessage("Could not recognize command, try again");
-                } catch (IllegalArgumentException e) {
-                    userInteraction.displayMessage("Invalid matrix dimensions");
                 }
             }
         } catch (Exception e) {
