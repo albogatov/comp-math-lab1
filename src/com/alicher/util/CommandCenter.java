@@ -67,6 +67,8 @@ public class CommandCenter {
      */
     public void executeCommand(UserInterface ui, String line, SystemSolver systemSolver) throws Exception {
         Command cmd = getCmd(line);
+        if (cmd == null)
+            throw new IllegalArgumentException("Unknown command entered, try again");
         cmd.execute(ui, systemSolver);
     }
 

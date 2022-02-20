@@ -16,17 +16,17 @@ public class Main {
                     "solve_from_input - solve a system based on a matrix of your choice\n" +
                     "solve_from_file - solve a system based on a matrix from a chosen file\n" +
                     "solve_random - solve a system based on a randomly generated matrix");
+            SystemSolver systemSolver = new SystemSolver();
             while (true) {
                 try {
-                    SystemSolver systemSolver = new SystemSolver();
                     String line;
                     do {
                         line = userInteraction.read().trim();
                         String cmd = line.split(" ")[0];
                         CommandCenter.getInstance().executeCommand(userInteraction, cmd, systemSolver);
                     } while (userInteraction.hasNextLine());
-                } catch (NullPointerException e) {
-                    userInteraction.displayMessage("Could not recognize command, try again");
+                } catch (IllegalArgumentException e) {
+                    userInteraction.displayMessage(e.getMessage());
                 }
             }
         } catch (Exception e) {

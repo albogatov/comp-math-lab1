@@ -12,15 +12,20 @@ public class SolveFromInput extends Command {
     }
 
     public void execute(UserInterface ui, SystemSolver systemSolver) throws Exception {
+        int size = -1;
         if(ui.isInteractive())
-            ui.displayMessage("Enter matrix size");
-        int size = ui.readInt();
+            while (size <= 0) {
+                ui.displayMessage("Enter matrix size (must be a positive number)");
+                size = ui.readInt();
+            }
+        else size = ui.readInt();
         double[][] elements = new double[size][size + 1];
         if(ui.isInteractive())
             ui.displayMessage("Enter the elements of the matrix");
         for (int i = 0; i < size; i++)
             for (int j = 0; j < size + 1; j++)
                 elements[i][j] = ui.readDouble();
+        ui.read();
         try {
             Matrix matrix = new Matrix(size, elements);
             Solve solveOp = new Solve();

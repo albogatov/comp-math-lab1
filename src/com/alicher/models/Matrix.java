@@ -110,9 +110,9 @@ public class Matrix {
     }
 
     public double findDiagonalMatrixDet() {
-        int det = 0;
+        double det = 1;
         for (int i = 0; i < rows; i++) {
-            det += elements[i][i];
+            det = det * elements[i][i];
         }
         return det;
     }
