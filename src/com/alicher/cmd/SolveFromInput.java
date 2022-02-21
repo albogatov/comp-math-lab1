@@ -25,7 +25,8 @@ public class SolveFromInput extends Command {
         for (int i = 0; i < size; i++)
             for (int j = 0; j < size + 1; j++)
                 elements[i][j] = ui.readDouble();
-        ui.read();
+        if(ui.isInteractive())
+            ui.read();
         try {
             Matrix matrix = new Matrix(size, elements);
             Solve solveOp = new Solve();

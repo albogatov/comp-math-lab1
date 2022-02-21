@@ -8,6 +8,8 @@ public class SystemSolver {
     public Solution solveSystem(Matrix matrix) {
         Matrix initialMatrix = new Matrix(matrix.getRows(), matrix.getElements());
         Matrix triangularMatrix = findTriangularMatrix(matrix);
+        if (triangularMatrix == null)
+            return null;
         double det = triangularMatrix.findDiagonalMatrixDet();
         if (det == 0)
             return null;
@@ -31,6 +33,8 @@ public class SystemSolver {
         double[][] mainElementRows = new double[matrix.getRows()][matrix.getColumns()];
         for (int i = 0; i < initialRows; i++) {
             double[] maxElementData = matrix.findColumnAbsMaxElement(i);
+            if (maxElementData[0] == 0)
+                return null;
             double[] multipliers = matrix.findMultipliers(maxElementData[0], (int) maxElementData[2]);
             double[] mainElementRow = matrix.getMatrixRow((int) maxElementData[1]);
             mainElementRows = fillRowIntoArray(mainElementRow, mainElementRows, currentRowsRemoved);
